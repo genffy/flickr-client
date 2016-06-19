@@ -1,0 +1,8 @@
+{
+    "server":"us02-17.ssv7.net",
+    "server_port":36350,
+    "local_port":3000,
+    "password":"J8VSg3CpvdmR",
+    "timeout":600,
+    "method":"aes-256-cfb"
+}
