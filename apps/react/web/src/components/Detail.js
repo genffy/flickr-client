@@ -3,10 +3,16 @@
  */
 import React from 'react'
 const Detail = React.createClass({
+    componentDidMount() {
+        const params = this.props.params
+        console.log("get route urls", params)
+    },
     render() {
         "use strict";
         return(
-            <div>这是一个相册的详细页面,妈蛋的</div>
+            <div>
+                <h2>这是一个图片的详细页面,妈蛋的</h2>
+            </div>
         )
     }
 });

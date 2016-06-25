@@ -11,7 +11,7 @@ module.exports = {
     output: {
         filename: "[name].bundle.js",
         chunkFilename: "[id].chunk.js",
-        path: path.join(__dirname, '/web/assets/'),
+        path: path.join(__dirname, '/web/'),
         publicPath: '/assets/'
     },
     devtool: 'cheap-module-eval-source-map',

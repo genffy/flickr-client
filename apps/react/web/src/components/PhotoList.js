@@ -1,6 +1,3 @@
-/**
- * Created by genffy on 16/6/4.
- */
 import React, { Component, PropTypes} from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';

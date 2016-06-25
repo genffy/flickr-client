@@ -11,7 +11,6 @@ import Style from './Layout.scss'
 export default class Layout extends React.Component {
     constructor(props) {
         super(props);
-        console.log('什么鬼哦');
     }
     render() {
         return (

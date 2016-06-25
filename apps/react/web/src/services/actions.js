@@ -13,6 +13,7 @@ export const REQUEST_TAGS = 'REQUEST_TAGS'
 export const RECEIVE_TAGS = 'RECEIVE_TAGS'
 export const SELECT_TAG = 'SELECT_TAG'
 export const INVALIDATE_TAG = 'INVALIDATE_TAG'
+
 // 获取相册列表
 function requestPosts(reddit) {
     return {

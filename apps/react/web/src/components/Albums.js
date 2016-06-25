@@ -1,13 +1,19 @@
-/**
- * Created by genffy on 16/6/5.
- */
-import React from 'react'
-const Albums = React.createClass({
+import React, {Component} from 'react'
+
+class Albums extends Component{
     render(){
         "use strict";
         return (
-            <div>这是一个相册页面呢,天啦噜</div>
+            <div>
+                <p>相册标题</p>
+                <p>相册副标题</p>
+                <p>多少张照片，以及浏览量</p>
+                <p>作者</p>
+                <div>
+                    照片列表了PhotoList
+                </div>
+            </div>
         )
     }
-});
+}
 export default Albums;

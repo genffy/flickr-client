@@ -8,29 +8,36 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 // Check this repo:
 // https://github.com/zilverline/react-tap-event-plugin
 injectTapEventPlugin();
+
 // router
-import { Router, Route, IndexRoute, hashHistory} from 'react-router'
+import { Router, Route, IndexRoute, hashHistory, IndexRedirect} from 'react-router'
 // child page
 import Layout from './src/components/Layout.js'
 import Home from './src/components/Home.js'
+import PhotosWrap from './src/components/PhotosWrap.js'
+import Photos from './src/components/Photos.js'
 import Detail from './src/components/Detail.js'
 import Albums from './src/components/Albums.js'
-/*import Search from './src/components/Search.js'
 import Personal from './src/components/Personal.js'
-import Upload from './src/components/Upload.js'*/
+import AlbumList from './src/components/AlbumList.js'
+import Upload from './src/components/Upload.js'
 
 ReactDOM.render((
     <Router history={hashHistory}>
         <Route path="/" component={Layout}>
             <IndexRoute component={Home}/>
-            <Route path="/list/hot" component={Home}/>
-            <Route path="/list/recent" component={Albums}/>
-
-            <Route path="/detail/:id" component={Detail}/>
+            <Route path="photos" component={PhotosWrap}>
+                <IndexRedirect to="recent"/>
+                <Route path="recent" component={Photos} type='recent'/>
+                <Route path="tag(/:tag)" component={Photos} type='tag'/>
+                <Route path="detail(/:id)" component={Detail}/>
+            </Route>
+            <Route path="albums(/:id)" component={Albums}/>
+            <Route path="author/:userName" component={Personal}>
+                <IndexRoute component={Photos} type='all'/>
+                <Route path="albums" component={AlbumList}/>
+                <Route path="favorites" component={Photos} type='favorites'/>
+            </Route>
         </Route>
     </Router>
 ), document.getElementById('app'));
-
-// <Route path="/search" component={Search}/>
-// <Route path="/personal" component={Personal}/>
-// <Route path="/upload" component={Upload}/>
