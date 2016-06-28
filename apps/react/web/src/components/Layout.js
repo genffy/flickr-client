@@ -1,12 +1,13 @@
-/**
- * Created by genffy on 16/6/5.
- */
-
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
+import { Provider } from 'react-redux'
+
 import Header from './Header.js'
 import Style from './Layout.scss'
+
+import configureStore from '../services/configureStore.js'
+const store = configureStore();
 
 export default class Layout extends React.Component {
     constructor(props) {
@@ -19,7 +20,9 @@ export default class Layout extends React.Component {
                     <div>
                         <Header/>
                         <div class="content">
-                            {this.props.children}
+                            <Provider store={store}>
+                                {this.props.children}
+                            </Provider>
                         </div>
                         <footer>
                             <p>Copyright &copy; 2016 Genffy</p>

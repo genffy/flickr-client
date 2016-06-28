@@ -1,6 +1,3 @@
-/**
- * Created by genffy on 16/6/4.
- */
 import React from 'react'
 import ReactDOM from 'react-dom'
 import injectTapEventPlugin from 'react-tap-event-plugin'
