@@ -31,9 +31,9 @@ ReactDOM.render((
             </Route>
             <Route path="albums(/:id)" component={Albums}/>
             <Route path="author/:userName" component={Personal}>
-                <IndexRoute component={Photos} type='all'/>
+                <IndexRoute component={Photos} type='user'/>
                 <Route path="albums" component={AlbumList}/>
-                <Route path="favorites" component={Photos} type='favorites'/>
+                <Route path="favorites" component={Photos} type='fav'/>
             </Route>
         </Route>
     </Router>

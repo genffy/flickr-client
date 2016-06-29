@@ -39,41 +39,11 @@ class PhotosWrap extends Component{
                 <Link to='/photos/tag'>根据tag选择</Link><br/>
                 <Link to='/photos/detail'>照片详细</Link><br/>
                 <div class="wrap">
-                    {this.props.children && React.cloneElement(this.props.children, {
-                        photos: photos,
-                        refreshCb: this.handleRefresh,
-                        isFetching: isFetching,
-                        lastUpdated: lastUpdated
-                    })}
+                    {this.props.children}
                 </div>
             </div>
         )
     }
 }
 
-PhotosWrap.propTypes = {
-    selectedReddit: PropTypes.string.isRequired,
-    posts: PropTypes.array.isRequired,
-    isFetching: PropTypes.bool.isRequired,
-    lastUpdated: PropTypes.number,
-    dispatch: PropTypes.func.isRequired
-}
-
-function mapStateToProps(state) {
-    const { selectedReddit, postsByReddit} = state
-    const {
-        isFetching,
-        lastUpdated,
-        items: posts
-    } = postsByReddit[selectedReddit] || {
-        isFetching: true,
-        items: []
-    }
-    return {
-        selectedReddit,
-        posts,
-        isFetching,
-        lastUpdated
-    }
-}
-export default connect(mapStateToProps)(PhotosWrap);
+export default PhotosWrap;

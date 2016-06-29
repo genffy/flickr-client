@@ -6,7 +6,8 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        react: "./web/app.js"
+        react: "./web/app.js",
+        test: "./web/test.js"
     },
     output: {
         filename: "[name].bundle.js",

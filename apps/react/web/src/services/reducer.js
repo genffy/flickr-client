@@ -8,6 +8,7 @@ import {
     REQUEST_POSTS, RECEIVE_POSTS,
     SELECT_TAG, INVALIDATE_TAG,
     REQUEST_TAGS, RECEIVE_TAGS,
+    SELECT_PHOTO, REQUEST_PHOTOS, RECEIVE_PHOTOS
 } from './actions.js'
 
 function selectedReddit(state = 'all', action) {
@@ -71,10 +72,23 @@ function tagsByDefault(state = { }, action) {
             return state
     }
 }
+
+function photos(state = {}, action) {
+    switch (action.type) {
+        case REQUEST_PHOTOS:
+        case RECEIVE_PHOTOS:
+            return Object.assign({}, state, {
+                photos: action.data || []
+            })
+        default:
+            return state
+    }
+}
 const rootReducer = combineReducers({
     postsByReddit,
     selectedReddit,
-    tagsByDefault
+    tagsByDefault,
+    photos,
 })
 
 export default rootReducer

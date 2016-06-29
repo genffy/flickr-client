@@ -2,7 +2,7 @@
  * Created by genffy on 16/6/7.
  */
 import React, { Component, PropTypes } from 'react'
-import {fetchTagsIfNeeded} from '../services/actions.js'
+import {fetchTags} from '../services/actions.js'
 import { connect } from 'react-redux'
 class Picker extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class Picker extends Component {
     }
     componentWillMount() {
         const { dispatch, value } = this.props
-        dispatch(fetchTagsIfNeeded(value))
+        dispatch(fetchTags(value))
     }
     render() {
         const {tags, value, onChange} = this.props
