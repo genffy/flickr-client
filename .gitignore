@@ -5,5 +5,6 @@ dist
 bower_components
 node_modules
 redent
+npm-debug.log
 *.css
 *.css.map
