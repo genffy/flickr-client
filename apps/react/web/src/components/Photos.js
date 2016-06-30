@@ -81,8 +81,8 @@ class Photos extends Component {
         this.props.refreshCb && this.props.refreshCb(e)
     }
     render() {
-        const { posts, isFetching, lastUpdated } = this.props
-        const isEmpty = posts.length === 0
+        const { photos, isFetching, lastUpdated } = this.props
+        const isEmpty = photos.length === 0
         return (
             <div style={Style.root}>
                 <p>
@@ -101,7 +101,7 @@ class Photos extends Component {
                     : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
                     <GridList cols={5} style={Style.gridList}>
                         <Subheader>精彩瞬间</Subheader>
-                        {posts.map((tile) => (
+                        {photos.map((tile) => (
                             <GridTile
                                 key={tile.id}
                                 title={tile.title}
@@ -143,7 +143,9 @@ function mapStateToProps(state) {
     }*/
     const { photos } = state
     return {
-        tags: photos['tags'] || []
+        photos: photos['photos'] || [],
+        isFetching: photos['isFetching'] || true,
+        lastUpdated: photos['lastUpdated'] || 0
     }
 }
 export default connect(mapStateToProps)(Photos);

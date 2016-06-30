@@ -28,6 +28,7 @@ function receivePhotos(params, json) {
 }
 
 function fetchPhotos(params) {
+    console.log('export class', Flickr)
     return dispatch => {
         dispatch(requestPhotos(params))
         const type = params.type, config = params.data
