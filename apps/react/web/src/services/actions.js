@@ -7,6 +7,11 @@ import Flickr from './flickr.js'
 export const REQUEST_PHOTOS = 'REQUEST_PHOTOS'
 export const RECEIVE_PHOTOS = 'RECEIVE_PHOTOS'
 
+export const REQUEST_PHOTO_DETAIL = 'REQUEST_PHOTO_DETAIL'
+export const RECEIVE_PHOTO_DETAIL = 'RECEIVE_PHOTO_DETAIL'
+
+export const REQUEST_PHOTO_COMMENTS = 'REQUEST_PHOTO_COMMENTS'
+export const RECEIVE_PHOTO_COMMENTS = 'RECEIVE_PHOTO_COMMENTS'
 
 function requestPhotos(params) {
     return {
@@ -28,7 +33,6 @@ function receivePhotos(params, json) {
 }
 
 function fetchPhotos(params) {
-    console.log('export class', Flickr)
     return dispatch => {
         dispatch(requestPhotos(params))
         const type = params.type, config = params.data
@@ -60,10 +64,54 @@ function fetchPhotos(params) {
     }
 }
 
+function fetchPhotoComments(params) {
+    return dispatch => {
+        dispatch({
+            type: REQUEST_PHOTO_COMMENTS,
+            params
+        })
+        Flickr.getPhotoComments(params).then(res => {
+            dispatch({
+                type: RECEIVE_PHOTO_COMMENTS,
+                params,
+                comments: res.comments.comment
+            })
+        })
+    }
+}
+
+function fetchPhotoDetail(params) {
+    return dispatch => {
+        dispatch({
+            type: REQUEST_PHOTO_DETAIL,
+            params
+        })
+        Flickr.getPhotoDetail(params).then(res => {
+            dispatch({
+                type: RECEIVE_PHOTO_DETAIL,
+                params,
+                detail: res.photo
+            })
+        })
+    }
+}
+
 export function getPhotosByCondition(params) {
     return (dispatch, getState) => {
         const state = getState()
         console.log('getPhotosByCondition log state', state)
         return dispatch(fetchPhotos(params))
+    }
+}
+
+export function getPhotoDetail(params) {
+    return (dispatch, getState) => {
+        return dispatch(fetchPhotoDetail(params))
+    }
+}
+
+export function getPhotoComments(params) {
+    return (dispatch, getState) => {
+        return dispatch(fetchPhotoComments(params))
     }
 }

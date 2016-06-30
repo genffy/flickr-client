@@ -40,22 +40,28 @@ const store = (function configureStore(preloadedState) {
 class Container extends Component{
     constructor(props){
         super(props);
-        this.onClickHandler = this.onClickHandler.bind(this)
+        // this.onClickHandler = this.onClickHandler.bind(this)
         this.jsonStr = '乱七八糟的'
+        this.testAboutBind()
     }
     componentDidMount(){
         setTimeout(()=>this.props.action(),2000);
     }
-    onClickHandler(){
+
+    testAboutBind() {
+        console.log('testAboutBind log', this.props)
+    }
+    onClick(){
+        console.log('onClickHandler log ', this)
         const str = '/**/jsonFlickrApi({ "stat": "fail", "code": 98, "message": "Invalid auth token" })';
         this.jsonStr = this.props.onClickHandler(str, 'jsonFlickrApi')
         console.log("hhh", JSON.parse(this.jsonStr))
     }
     render(){
-
+        console.log('render log ', this)
         return(
             <div>
-                <a href="javscript:;" onClick={this.onClickHandler}>点击解析jsonpbody</a>
+                <a href="javscript:;" onClick={::this.onClick}>点击解析jsonpbody</a>
                 <p>解析好的json是: {this.jsonStr}</p>
                 <div>执行动作:{JSON.stringify(this.props.hint)}</div>
                 <ul>{this.props.data.length?'结果':''}

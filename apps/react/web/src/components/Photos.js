@@ -4,6 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router'
 import { getPhotosByCondition } from '../services/actions.js'
 
 import Style from './Photos.scss'
@@ -11,8 +12,8 @@ import Style from './Photos.scss'
 class Photos extends Component {
     constructor(props) {
         super(props)
-        this.getPhotos = this.getPhotos.bind(this)
         // init
+        this.getPhotos = this.getPhotos.bind(this)
         this.getPhotos(this.props.route.type, true)
     }
     componentWillMount() {
@@ -37,7 +38,7 @@ class Photos extends Component {
 
     }
     componentDidUpdate(prevProps, prevState) {
-        console.log('must update?')
+
     }
     componentWillUnmount() {
 
@@ -80,6 +81,9 @@ class Photos extends Component {
         // TODO
         this.props.refreshCb && this.props.refreshCb(e)
     }
+    HandleOnTouchTap(e, data){
+        this.props.router.push(`/photos/detail/${data.id}`);
+    }
     render() {
         const { photos, isFetching, lastUpdated } = this.props
         const isEmpty = photos.length === 0
@@ -92,23 +96,22 @@ class Photos extends Component {
                         {' '}
                     </span>
                     }
-                    {!isFetching &&
-                    <a href="#" onClick={this.handleRefreshClick}> Refresh</a>
-                    }
+                    {!isFetching && <a href="#" onClick={this.handleRefreshClick}> Refresh</a>}
                 </p>
                 {isEmpty
                     ? (isFetching ? <h2>Loading...</h2> : <h2>Empty.</h2>)
                     : <div style={{ opacity: isFetching ? 0.5 : 1 }}>
-                    <GridList cols={5} style={Style.gridList}>
+                    <GridList cols={4} style={Style.gridList}>
                         <Subheader>精彩瞬间</Subheader>
-                        {photos.map((tile) => (
+                        {photos.map((data) => (
                             <GridTile
-                                key={tile.id}
-                                title={tile.title}
-                                subtitle={<span>by <b>{tile.owner}</b></span>}
+                                key={data.id}
+                                title={data.title}
+                                subtitle={<span>by <Link to={'/author/'+data.owner}>{data.owner}</Link></span>}
                                 actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
                             >
-                                <img src={tile.imgUrl} />
+                                {/*<Link className="cover-link" to={'/photos/detail/'+ data.id }></Link>*/}
+                                <img onClick={()=>this.HandleOnTouchTap(event, data)} src={data.imgUrl} />
                             </GridTile>
                         ))}
                     </GridList>
@@ -137,4 +140,4 @@ function mapStateToProps(state) {
         lastUpdated
     }
 }
-export default connect(mapStateToProps)(Photos);
+export default connect(mapStateToProps)(withRouter(Photos));

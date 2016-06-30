@@ -1,5 +1,4 @@
 import React from 'react'
-import PhotoList from './PhotoList.js'
 import { Link } from 'react-router'
 import { Provider } from 'react-redux'
 import configureStore from '../services/configureStore.js'
