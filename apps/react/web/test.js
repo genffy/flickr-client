@@ -40,13 +40,23 @@ const store = (function configureStore(preloadedState) {
 class Container extends Component{
     constructor(props){
         super(props);
+        this.onClickHandler = this.onClickHandler.bind(this)
+        this.jsonStr = '乱七八糟的'
     }
     componentDidMount(){
         setTimeout(()=>this.props.action(),2000);
     }
+    onClickHandler(){
+        const str = '/**/jsonFlickrApi({ "stat": "fail", "code": 98, "message": "Invalid auth token" })';
+        this.jsonStr = this.props.onClickHandler(str, 'jsonFlickrApi')
+        console.log("hhh", JSON.parse(this.jsonStr))
+    }
     render(){
+
         return(
             <div>
+                <a href="javscript:;" onClick={this.onClickHandler}>点击解析jsonpbody</a>
+                <p>解析好的json是: {this.jsonStr}</p>
                 <div>执行动作:{JSON.stringify(this.props.hint)}</div>
                 <ul>{this.props.data.length?'结果':''}
                     {this.props.data.map((ele)=>{
@@ -69,10 +79,14 @@ class ModuleContainer extends Component{
     constructor(props){
         super(props);
     }
+    getJsonpData(body, prefix) {
+        const reg = new RegExp(`\\S*${prefix}\\(`)
+        return body.replace(reg,'').replace(/\}\)$/, '}')
+    }
     render(){
         return (
             <Provider store={store}>
-                <IndexContainer/>
+                <IndexContainer onClickHandler={this.getJsonpData}/>
             </Provider>
         )
     }

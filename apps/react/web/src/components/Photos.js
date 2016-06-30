@@ -126,26 +126,15 @@ Photos.propTypes = {
 }
 
 function mapStateToProps(state) {
-    /*const { selectedReddit, postsByReddit} = state
-    const {
-        isFetching,
-        lastUpdated,
-        items: posts
-    } = postsByReddit[selectedReddit] || {
+    const {photos, isFetching, lastUpdated} = state.photos || {
+        photos: [],
         isFetching: true,
-        items: []
+        lastUpdated: 0
     }
     return {
-        selectedReddit,
-        posts,
+        photos,
         isFetching,
         lastUpdated
-    }*/
-    const { photos } = state
-    return {
-        photos: photos['photos'] || [],
-        isFetching: photos['isFetching'] || true,
-        lastUpdated: photos['lastUpdated'] || 0
     }
 }
 export default connect(mapStateToProps)(Photos);

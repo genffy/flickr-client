@@ -63,7 +63,7 @@ function fetchPhotos(params) {
 export function getPhotosByCondition(params) {
     return (dispatch, getState) => {
         const state = getState()
-        console.log(state)
+        console.log('getPhotosByCondition log state', state)
         return dispatch(fetchPhotos(params))
     }
 }
