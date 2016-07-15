@@ -8,3 +8,4 @@ redent
 npm-debug.log
 *.css
 *.css.map
+config.json
